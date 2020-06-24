@@ -98,9 +98,9 @@
   //   return age > 18 || confirm ('Родители разрешили?');
     
   // }
+  
 
-
-  let money = prompt('Ваш бюджет на месяц?'),
+  let money = +prompt('Ваш бюджет на месяц?'),
       time = prompt('Введите дату в формате YYYY-MM-DD');
 
   let appData = {
@@ -111,10 +111,22 @@
     income: [],
     savings: false
 };
-    for(x = 0; x < 2; x++) {
-    let compulsoryExpenses = prompt('Введите обязательную статью расходов в этом месяце'),
-        compulsoryExpensesVolume = prompt('Во сколько обойдется?');
+    for(let x = 0; x < 2; x++) {
+    let a = prompt('Введите обязательную статью расходов в этом месяце'),
+        b = prompt('Во сколько обойдется?');
+    if(a !== null && a !== '' && a.length < 10 && b !== null && b !== '' && b.length < 10 ){
+        appData.expenses[a] = b;
+    } else {
+        alert("Введите верные данные");
+        x--;
     }
+    }
+    
+    
+    
+    
+    alert(`Ваш бюджет на один день ${appData.budget / 30} рублей`);
 
-    appData.expenses.compulsoryExpenses = compulsoryExpensesVolume;
-    console.log(appData.expenses);
+    console.log(appData);
+    
+    
