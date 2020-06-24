@@ -116,5 +116,5 @@
         compulsoryExpensesVolume = prompt('Во сколько обойдется?');
     }
 
-    appData.expenses = (compulsoryExpenses==compulsoryExpensesVolume);
+    appData.expenses.compulsoryExpenses = compulsoryExpensesVolume;
     console.log(appData.expenses);
