@@ -123,9 +123,9 @@
     }
     
     
+    appData.moneyPerDay = appData.budget / 30;
     
-    
-    alert(`Ваш бюджет на один день ${appData.budget / 30} рублей`);
+    alert(`Ваш бюджет на один день ${appData.moneyPerDay} рублей`);
 
     console.log(appData);
     
