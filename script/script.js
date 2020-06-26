@@ -100,8 +100,19 @@
   // }
   
 
-  let money = +prompt('Ваш бюджет на месяц?'),
+  let money,
       time = prompt('Введите дату в формате YYYY-MM-DD');
+
+      start(); 
+
+    function start(){
+        
+        while(isNaN(money) || money == '' || money == null){
+            money = +prompt('Ваш бюджет на месяц?');
+        }
+    }
+
+    
 
   let appData = {
     budget: money,
@@ -109,24 +120,64 @@
     expenses: {},
     optionalExpenses: {},
     income: [],
-    savings: false
+    incomeLevel: {},
+    savings: false,
+    chooseOptExpenses: []
 };
+    
+    askQuestion();
+
+    function askQuestion(){
     for(let x = 0; x < 2; x++) {
-    let a = prompt('Введите обязательную статью расходов в этом месяце'),
-        b = prompt('Во сколько обойдется?');
+
+        let a = prompt('Введите обязательную статью расходов в этом месяце'),
+            b = prompt('Во сколько обойдется?');
     if(a !== null && a !== '' && a.length < 10 && b !== null && b !== '' && b.length < 10 ){
+        
         appData.expenses[a] = b;
     } else {
         alert("Введите верные данные");
         x--;
     }
     }
-    
-    
+}
+
+    detectDayBudget();
+
+    function detectDayBudget(){
     appData.moneyPerDay = appData.budget / 30;
     
-    alert(`Ваш бюджет на один день ${appData.moneyPerDay} рублей`);
+    alert(`Ваш бюджет на один день ${Math.round(appData.moneyPerDay)} рублей`);
+    }
 
+    
+
+    function detectLevel(){
+        if(appData.moneyPerDay < 1000){
+            appData.incomeLevel = "низкий";
+        }
+        if(appData.moneyPerDay >= 1000 && appData.moneyPerDay < 2000){
+            appData.incomeLevel = "средний";
+        }
+        if(appData.moneyPerDay > 2000){
+            appData.incomeLevel = 'высокий';
+        }
+        
+    }
+
+    detectLevel();
+
+    function additionalExpenses(){
+        for(x = 0; x < 3; x++ ){
+            appData.chooseOptExpenses = [+prompt("Статья необязательных расходов?")];
+            
+        }
+        
+    }
+    
+    additionalExpenses();
+    
     console.log(appData);
+   
     
     
